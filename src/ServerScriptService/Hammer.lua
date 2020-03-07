@@ -1,5 +1,0 @@
-local Hammer = {}
-
-
-
-return Hammer
