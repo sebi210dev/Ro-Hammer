@@ -1,5 +1,5 @@
 {
-  "name": "Ro-Hammer",
+  "name": "Hammer",
   "tree": {
     "$className": "DataModel",
     "HttpService": {
@@ -11,33 +11,23 @@
     "Lighting": {
       "$className": "Lighting",
       "$properties": {
+        "GlobalShadows": true,
         "Outlines": false,
         "Technology": "Voxel",
-        "Brightness": 2.0,
         "Ambient": [
           0.0,
           0.0,
           0.0
         ],
-        "GlobalShadows": true
+        "Brightness": 2.0
       }
     },
-    "ReplicatedStorage": {
-      "$ignoreUnknownInstances": true,
-      "$className": "ReplicatedStorage",
-      "$path": "src/ReplicatedStorage"
-    },
-    "StarterGui": {
-      "$ignoreUnknownInstances": true,
-      "$className": "StarterGui",
-      "$path": "src/StarterGui"
-    },
     "ServerScriptService": {
-      "$ignoreUnknownInstances": false,
       "$className": "ServerScriptService",
-      "$path": "src/ServerScriptService"
+      "Source": {
+        "$path": "ServerScriptService"
+      }
     },
-    
     "SoundService": {
       "$className": "SoundService",
       "$properties": {
@@ -46,8 +36,6 @@
     },
     "Workspace": {
       "$className": "Workspace",
-      "$path": "src/Workspace",
-      "$ignoreUnknownInstances": true,
       "$properties": {
         "FilteringEnabled": true
       },
@@ -55,11 +43,6 @@
         "$className": "Part",
         "$properties": {
           "Anchored": true,
-          "Size": [
-            512.0,
-            20.0,
-            512.0
-          ],
           "Position": [
             0.0,
             -10.0,
@@ -69,6 +52,11 @@
             0.38823,
             0.37254,
             0.38823
+          ],
+          "Size": [
+            512.0,
+            20.0,
+            512.0
           ],
           "Locked": true
         }
