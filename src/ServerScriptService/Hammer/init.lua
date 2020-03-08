@@ -16,9 +16,9 @@ function Hammer.Init(Settings)
         local BanStore = DS2("Bans", player)
         local IsBanned = BanStore:Get()
 
-        if IsBanned then
+        if IsBanned == nil then
             BanStore:Set(false)
-        else
+        elseif IsBanned == true then
             Player:Kick(self.Settings.BanMessage or "You are banned from the game.")
         end
     end)
