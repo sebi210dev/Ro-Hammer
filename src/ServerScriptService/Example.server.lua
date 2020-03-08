@@ -15,7 +15,6 @@ Hammer.Init(Options)
 
 --// Ban sebi for not using OOP
 Players.PlayerAdded:Connect(function(Player)
-    print(Hammer:IsBanned(Player))
     if (Player.UserId == SebiId and not Hammer:IsBanned(Player)) then
         Hammer:Ban(Player)
         prtin("Banned")
