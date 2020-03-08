@@ -4,7 +4,7 @@ local DS2 = require(ServerScriptService.Hammer.DataStore2)
 
 function RegularBan:Ban(Player, Message)
     local Store = DS2("Bans", Player)
-    if not Store:Get() then
+    if not Store:Get(false) then
         Store:Set(true)
         Player:Kick(Message)
     end

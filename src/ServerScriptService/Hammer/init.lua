@@ -7,6 +7,7 @@ local DS2 = require(ServerScriptService.Hammer.DataStore2)
 DS2.Combine("MasterKey", "Bans", "TimedBans")
 
 local RegularBan = require(script.RegularBan)
+local TimedBan = require(script.TimedBan)
 local Webhooks = require(script.Webhooks)
 
 function Hammer.Init(Settings)
@@ -27,6 +28,7 @@ function Hammer.Init(Settings)
 
         if self.Settings.CmdsEnabled and self.Settings.Admins and table.find(self.Settings.Admins, Player.UserId) then
             Player.Chatted:Connect(function(Message)
+                
                 local MsgPrefix = string.sub(Message, 1, 1)
 
                 if MsgPrefix == (self.Settings.CmdPrefix or "/") then
@@ -37,6 +39,8 @@ function Hammer.Init(Settings)
                         if Players:FindFirstChild(NonLoweredArguments[2]) then
                             self:Ban(Players[NonLoweredArguments[2]])
                         end
+                    elseif Arguments[1] == "timedban" then
+                    
                     end
                 end
             end)
@@ -62,6 +66,16 @@ function Hammer:Ban(Player)
     end
 end   
 
+function Hammer:TimedBan(Player)
+    if Player then
+        TimedBan:Ban(Player, self.Settings.BannedMessage or "You have been temporarily banned!")
+
+        if self.Settings.WebhookURL then
+            Webhooks:SendGotBanned(self.Settings.WebhookURL, Player)
+        end
+    end
+end
+
 function Hammer:Unban(Player)
     if Player then
         RegularBan:Unban(Player)
@@ -69,7 +83,7 @@ function Hammer:Unban(Player)
 end
 
 function Hammer:IsBanned(Player)
-    if Player and DS2("Bans", Player):Get() and os.time() > DS2("TimedBans", Player):Get(0) then
+    if Player and DS2("Bans", Player):Get(false) and os.time() > DS2("TimedBans", Player):Get(0) then
         return true
     end
 end
