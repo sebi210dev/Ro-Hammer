@@ -2,6 +2,7 @@ local Webhooks = {}
 local HttpService = game:GetService("HttpService")
 
 function Webhooks:SendGotBanned(URL, Player, PersonWhoBanned)
+    local Date = os.date("!*t")
     local Content = {
         embeds = {
             {
@@ -9,8 +10,12 @@ function Webhooks:SendGotBanned(URL, Player, PersonWhoBanned)
                 color = Color3.fromRGB(255, 0, 0);
                 fields = {
                     {
-                        name = "Player banned";
+                        name = "Player banned:";
                         value = Player
+                    };
+                    {
+                        name = "Banned at:";
+                        value = string.format("%d:%d:%d %d/%d/%d", Date.sec, Date.min, Date.hour, Date.day, Date.month, Date.year)
                     };
                 }
             }
