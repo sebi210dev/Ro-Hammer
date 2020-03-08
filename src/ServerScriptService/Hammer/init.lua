@@ -18,7 +18,7 @@ function Hammer.Init(Settings)
 
     self.PlayerAddedConnection = Players.PlayerAdded:Connect(function(Player)
         local BanStore = DS2("Bans", Player)
-        local IsBanned = BanStore:Get()
+        local IsBanned = self:IsBanned(Player)
 
         if IsBanned then
             Player:Kick(self.Settings.BanMessage or "You are banned from the game.")
@@ -63,9 +63,7 @@ function Hammer:Unban(Player)
 end
 
 function Hammer:IsBanned(Player)
-    if Player and DS2("Bans", Player):Get() and os.time() > DS2("TimedBans", Player):Get() then
-        return false
-    else
+    if Player and DS2("Bans", Player):Get() and os.time() > DS2("TimedBans", Player):Get(0) then
         return true
     end
 end

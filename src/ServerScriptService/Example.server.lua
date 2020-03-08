@@ -14,7 +14,7 @@ local Options = {
 }
 
 local Module = require(ServerScriptService.Hammer)
-local Hammer = Module.Init()
+local Hammer = Module.Init(Options)
 
 --// Ban sebi for not using OOP
 local function PlayerAdded(Player)
