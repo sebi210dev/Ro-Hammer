@@ -3,7 +3,7 @@ Hammer.__index = Hammer
 
 local Players = game:GetService("Players")
 local ServerScriptService = game:GetService("ServerScriptService")
-local DS2 = require(ServerScriptService.DataStore2)
+local DS2 = require(ServerScriptService.Hammer.DataStore2)
 DS2.Combine("MasterKey", "Bans", "TimedBans")
 
 local RegularBan = require(script.RegularBan)

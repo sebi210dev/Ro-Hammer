@@ -1,6 +1,6 @@
 local RegularBan = {}
 local ServerScriptService = game:GetService("ServerScriptService")
-local DS2 = require(ServerScriptService.DataStore2)
+local DS2 = require(ServerScriptService.Hammer.DataStore2)
 
 function RegularBan:Ban(Player)
     local Store = DS2("Bans", Player)
