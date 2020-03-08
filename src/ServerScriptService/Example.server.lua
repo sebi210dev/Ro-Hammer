@@ -13,14 +13,21 @@ local Options = {
     BannedMessage = "You are beaned!";
 }
 
-local Hammer = require(ServerScriptService.Hammer)
-Hammer.Init(Options)
+local Module = require(ServerScriptService.Hammer)
+local Hammer = Module.Init()
 
 --// Ban sebi for not using OOP
-Players.PlayerAdded:Connect(function(Player)
+local function PlayerAdded(Player)
     print("Added")
+
     if (Player.UserId == SebiId and not Hammer:IsBanned(Player)) then
         Hammer:Ban(Player)
         print("Banned")
     end
-end)
+end
+
+for _, Player in ipairs(Players:GetPlayers()) do
+    PlayerAdded(Player)
+end
+
+Players.PlayerAdded:Connect(PlayerAdded)
