@@ -16,7 +16,7 @@ function Hammer.Init(Settings)
         self.Settings = Settings 
      end
 
-    self.PlayerAddedConnection = Players.PlayerAdded:Connect(function(Player)
+    local function PlayerAdded(Player)
         local BanStore = DS2("Bans", Player)
         local IsBanned = self:IsBanned(Player)
         print(IsBanned)
@@ -42,7 +42,10 @@ function Hammer.Init(Settings)
                 end
             end)
         end
-    end)
+    end
+
+    table.forEach(Players:GetPlayers(), PlayerAdded)
+    self.PlayerAddedConnection = Players.PlayerAdded:Connect(PlayerAdded)
 
     return self
 end
