@@ -24,9 +24,12 @@
     },
     "ServerScriptService": {
       "$className": "ServerScriptService",
-      "Source": {
-        "$path": "ServerScriptService"
-      }
+      "$path": "src/ServerScriptService"
+    },
+    "ReplicatedStorage": {
+      "$ignoreUnknownInstances": true,
+      "$className": "ReplicatedStorage",
+      "$path": "src/ReplicatedStorage"
     },
     "SoundService": {
       "$className": "SoundService",

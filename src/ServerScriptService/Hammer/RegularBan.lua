@@ -1,12 +1,12 @@
 local RegularBan = {}
 local ServerScriptService = game:GetService("ServerScriptService")
-local DS2 = require(ServerScriptService.DataStore2)
+local DS2 = require(ServerScriptService.Hammer.DataStore2)
 
-function RegularBan:Ban(Player)
+function RegularBan:Ban(Player, Message)
     local Store = DS2("Bans", Player)
     if not Store:Get() then
         Store:Set(true)
-        player:Kick("You have been banned from the game!")
+        player:Kick(Message))
     end
 end
 

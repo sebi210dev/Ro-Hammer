@@ -3,7 +3,7 @@ Hammer.__index = Hammer
 
 local Players = game:GetService("Players")
 local ServerScriptService = game:GetService("ServerScriptService")
-local DS2 = require(ServerScriptService.DataStore2)
+local DS2 = require(ServerScriptService.Hammer.DataStore2)
 DS2.Combine("MasterKey", "Bans", "TimedBans")
 
 local RegularBan = require(script.RegularBan)
@@ -32,8 +32,8 @@ function Hammer:Ban(Player)
     if Player then
         RegularBan:Ban(Player, self.Settings.BannedMessage or "You have been banned from the game!")
 
-        if self.Settings.SendWebhook then
-            
+        if self.Settings.SendWebhook and self.Settings.WebhookURL then
+            Webhooks:SendGotBanned(self.Settings.WebhookURL, Player)
         end
     end
 end   
