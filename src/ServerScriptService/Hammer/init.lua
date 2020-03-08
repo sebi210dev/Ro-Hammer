@@ -64,8 +64,10 @@ end
 
 function Hammer:IsBanned(Player)
     if Player and DS2("Bans", Player):Get() and os.time() > DS2("TimedBans", Player):Get() then
+        print("Returned false")
         return false
     else
+        print("Returned true")
         return true
     end
 end
