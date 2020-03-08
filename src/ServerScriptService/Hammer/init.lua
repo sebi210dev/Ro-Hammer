@@ -48,8 +48,10 @@ function Hammer:Unban(Player)
 end
 
 function Hammer:IsBanned(Player)
-    if Player then
-        return RegularBan:IsBanned(Player)
+    if Player and DS2("Bans", Player):Get() and os.time() > DS2("TimedBans", Player):Get() then
+        return false
+    else
+        return true
     end
 end
 
