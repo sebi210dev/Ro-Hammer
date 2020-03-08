@@ -22,6 +22,24 @@ function Hammer.Init(Settings)
 
         if IsBanned then
             Player:Kick(self.Settings.BanMessage or "You are banned from the game.")
+            return
+        end
+
+        if self.Settings.CmdsEnabled and self.Settings.Admins and table.find(self.Settings.Admins, Player.UserId) then
+            Player.Chatted:Connect(function(Message)
+                local MsgPrefix = string.sub(Message, 1, 1)
+
+                if MsgPrefix == (self.Settings.CmdPrefix or "/") then
+                    local Arguments = string.split(string.lower(string.sub(Message, 2, -1), " "))
+                    local NonLoweredArguments = string.split(string.sub(Message, 2, -1), " ")
+
+                    if Arguments[1] == "ban" then
+                        if Players:FindFirstChild(NonLoweredArguments[2]) then
+                            self:Ban(Players[NonLoweredArguments[2]])
+                        end
+                    end
+                end
+            end)
         end
     end)
 
@@ -32,7 +50,7 @@ function Hammer:Ban(Player)
     if Player then
         RegularBan:Ban(Player, self.Settings.BannedMessage or "You have been banned from the game!")
 
-        if self.Settings.SendWebhook and self.Settings.WebhookURL then
+        if self.Settings.WebhookURL then
             Webhooks:SendGotBanned(self.Settings.WebhookURL, Player)
         end
     end
