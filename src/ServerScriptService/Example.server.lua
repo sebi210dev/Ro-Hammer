@@ -18,11 +18,9 @@ local Hammer = Module.Init(Options)
 
 --// Ban sebi for not using OOP
 local function PlayerAdded(Player)
-    print("Added")
     local IsBanned = Hammer:IsBanned(Player)
     if (Player.UserId == SebiId and not IsBanned) then
         Hammer:Ban(Player)
-        print("Banned")
     end
 end
 

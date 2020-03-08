@@ -19,7 +19,6 @@ function Hammer.Init(Settings)
     local function PlayerAdded(Player)
         local BanStore = DS2("Bans", Player)
         local IsBanned = self:IsBanned(Player)
-        print(IsBanned)
 
         if IsBanned then
             Player:Kick(self.Settings.BanMessage or "You are banned from the game.")
