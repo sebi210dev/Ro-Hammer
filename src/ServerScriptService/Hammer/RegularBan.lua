@@ -6,7 +6,7 @@ function RegularBan:Ban(Player, Message)
     local Store = DS2("Bans", Player)
     if not Store:Get() then
         Store:Set(true)
-        player:Kick(Message))
+        player:Kick(Message)
     end
 end
 
