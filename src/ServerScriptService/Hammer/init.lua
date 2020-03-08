@@ -13,6 +13,7 @@ function Hammer.Init(Settings)
     local self = setmetatable({}, Hammer)
 
     self.Connection = Players.PlayerAdded:Connect(function(Player)
+        print("Hey")
         local BanStore = DS2("Bans", player)
         local IsBanned = BanStore:Get()
 
