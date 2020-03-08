@@ -44,7 +44,10 @@ function Hammer.Init(Settings)
         end
     end
 
-    table.forEach(Players:GetPlayers(), PlayerAdded)
+    for _, Player in ipairs(Players:GetPlayers()) do
+        PlayerAdded(Player)
+    end
+
     self.PlayerAddedConnection = Players.PlayerAdded:Connect(PlayerAdded)
 
     return self
