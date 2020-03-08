@@ -12,20 +12,18 @@ local Webhooks = require(script.Webhooks)
 function Hammer.Init(Settings)
     local self = setmetatable({}, Hammer)
 
-    self.Connection = Players.PlayerAdded:Connect(function(Player)
-        local BanStore = DS2("Bans", player)
+    if Settings then
+        self.Settings = Settings 
+     end
+
+    self.PlayerAddedConnection = Players.PlayerAdded:Connect(function(Player)
+        local BanStore = DS2("Bans", Player)
         local IsBanned = BanStore:Get()
 
         if IsBanned then
-            BanStore:Set(false)
-        else
             Player:Kick(self.Settings.BanMessage or "You are banned from the game.")
         end
     end)
-
-    if Settings then
-       self.Settings = Settings 
-    end
 
     return self
 end
