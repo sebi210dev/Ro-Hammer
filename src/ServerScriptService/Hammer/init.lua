@@ -66,9 +66,9 @@ function Hammer:Ban(Player)
     end
 end   
 
-function Hammer:TimedBan(Player)
+function Hammer:TimedBan(Player, Seconds)
     if Player then
-        TimedBan:Ban(Player, self.Settings.BannedMessage or "You have been temporarily banned!")
+        TimedBan:Ban(Player, Seconds, self.Settings.BannedMessage or "You have been temporarily banned!")
 
         if self.Settings.WebhookURL then
             Webhooks:SendGotBanned(self.Settings.WebhookURL, Player)
@@ -83,8 +83,11 @@ function Hammer:Unban(Player)
 end
 
 function Hammer:IsBanned(Player)
-    if Player and DS2("Bans", Player):Get(false) and os.time() > DS2("TimedBans", Player):Get(0) then
+    if Player and DS2("Bans", Player):Get(false) or DS2("TimedBans", Player):Get() - os.time() > 0 then
+        print("Is banned")
         return true
+    else
+        return false
     end
 end
 
