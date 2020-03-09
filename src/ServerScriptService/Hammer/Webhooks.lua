@@ -23,6 +23,7 @@ function Webhooks:SendGotBanned(URL, Player, PersonWhoBanned)
     }
 
     local Encoded = HttpService:JSONEncode(Content)
+    print(Encoded)
     HttpService:PostAsync(URL, Encoded)
 end
 

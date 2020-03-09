@@ -18,11 +18,11 @@ local Hammer = Module.Init(Options)
 
 --// Ban sebi for not using OOP
 local function PlayerAdded(Player)
-    --local IsBanned = Hammer:IsBanned(Player)
-    --if (Player.UserId == SebiId and not IsBanned) then
-        --print("BANAN")
-        --Hammer:TimedBan(Player, 120)
-    --end
+    local IsBanned = Hammer:IsBanned(Player)
+    if (Player.UserId == SebiId and not IsBanned) then
+        print("BANAN")
+        Hammer:TimedBan(Player, 20)
+    end
 end
 
 for _, Player in ipairs(Players:GetPlayers()) do
