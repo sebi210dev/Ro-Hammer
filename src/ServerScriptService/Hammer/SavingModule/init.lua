@@ -90,3 +90,5 @@ function SavingModule:Get(UserId)
 
     return Data;
 end
+
+return SavingModule
