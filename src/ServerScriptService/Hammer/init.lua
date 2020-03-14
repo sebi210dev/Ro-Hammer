@@ -31,9 +31,11 @@ function Hammer.Init(Settings)
                 if MsgPrefix == (self.Settings.CmdPrefix or "/") then
                     local Arguments = string.split(string.lower(string.sub(Message, 2, -1), " "))
                     local NonLoweredArguments = string.split(string.sub(Message, 2, -1), " ")
-
+                    print(Arguments[1])
                     if Arguments[1] == "ban" then
+ 
                         if Players:FindFirstChild(NonLoweredArguments[2]) then
+
                             self:Ban(Players[NonLoweredArguments[2]])
                         end
                     elseif Arguments[1] == "timedban" then
