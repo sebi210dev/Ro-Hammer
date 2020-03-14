@@ -55,7 +55,7 @@ function SavingModule:PcallMethod(DataStoreMethod, UserId, ...)
         end
 
         TryCount = TryCount + 1;
-        Success, Response = pcall(DataStoreService[DataStoreMethod], DataStoreService, Key, ...);
+        Success, Response = pcall(DataStoreService[DataStoreMethod.."()"], DataStoreService, Key, ...);
     end
 
     if (not Success) then
@@ -90,3 +90,6 @@ function SavingModule:Get(UserId)
 
     return Data;
 end
+
+
+return SavingModule
