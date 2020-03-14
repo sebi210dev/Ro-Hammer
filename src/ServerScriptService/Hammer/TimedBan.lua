@@ -15,7 +15,8 @@ function TimedBan:Ban(Player, TimeInSeconds, Message)
 end
 
 function TimedBan:IsBanned(Player)
-    return (SavingModule:Get(Player.UserId).Time - os.time()) > 0
+    local Data = SavingModule:Get(Player.UserId)
+    return (os.time() - Data.Time) > 0, Data.Reason
 end
 
 return TimedBan

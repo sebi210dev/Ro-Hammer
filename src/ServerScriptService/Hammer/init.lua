@@ -28,8 +28,8 @@ function Hammer.Init(Settings)
                 
                 local MsgPrefix = string.sub(Message, 1, 1)
 
-                if MsgPrefix == (self.Settings.CmdPrefix or "/") then
-                    local Arguments = string.split(string.lower(string.sub(Message, 2, -1), " "))
+                if (MsgPrefix == self.Settings.CmdPrefix or MsgPrefix == "/") then
+                    local Arguments = string.split(string.lower(string.sub(Message, 2, -1)), " ")
                     local NonLoweredArguments = string.split(string.sub(Message, 2, -1), " ")
                     print(Arguments[1])
                     if Arguments[1] == "ban" then
@@ -57,7 +57,8 @@ end
 
 function Hammer:Ban(Player)
     if Player then
-        RegularBan:Ban(Player, self.Settings.BannedMessage or "You have been banned from the game!")
+        local Reason = self.Settings.BannedMessage or "You have been banned from the game!"
+        RegularBan:Ban(Player, Reason)
 
         if self.Settings.WebhookURL then
             Webhooks:SendGotBanned(self.Settings.WebhookURL, Player)
@@ -67,7 +68,8 @@ end
 
 function Hammer:TimedBan(Player, Seconds)
     if Player then
-        TimedBan:Ban(Player, Seconds, self.Settings.BannedMessage or "You have been temporarily banned!")
+        local Reason = self.Settings.BannedMessage or "You have been temporarily banned!"
+        TimedBan:Ban(Player, Seconds, Reason)
 
         if self.Settings.WebhookURL then
             Webhooks:SendGotBanned(self.Settings.WebhookURL, Player)
@@ -82,7 +84,7 @@ function Hammer:Unban(Player)
 end
 
 function Hammer:IsBanned(Player)
-    if Player and RegularBan:IsBanned(Player) or TimedBan:IsBanned(Player) then
+    if Player and (select(1, RegularBan:IsBanned(Player)) or select(1, TimedBan:IsBanned(Player))) then
         return true
     else
         return false
