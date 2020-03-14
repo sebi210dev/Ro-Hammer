@@ -37,6 +37,7 @@ function SavingModule.new(Type, RetryCount)
 
         if (CachedData) then
             self:PcallMethod("SetAsync", Player.UserId, CachedData);
+            self.Cache[Player.UserId] = nil;
         end
     end)
 
