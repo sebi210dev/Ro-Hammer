@@ -3,8 +3,6 @@ Hammer.__index = Hammer
 
 local Players = game:GetService("Players")
 local ServerScriptService = game:GetService("ServerScriptService")
-local DS2 = require(ServerScriptService.Hammer.DataStore2)
-DS2.Combine("MasterKey", "Bans", "TimedBans")
 
 local RegularBan = require(script.RegularBan)
 local TimedBan = require(script.TimedBan)
@@ -18,11 +16,10 @@ function Hammer.Init(Settings)
      end
 
     local function PlayerAdded(Player)
-        local BanStore = DS2("Bans", Player)
-        local IsBanned = self:IsBanned(Player)
+        local IsBanned, Reason = RegularBan:IsBanned(Player)
 
         if IsBanned then
-            Player:Kick(self.Settings.BanMessage or "You are banned from the game.")
+            Player:Kick(Reason)
             return
         end
 
@@ -40,7 +37,7 @@ function Hammer.Init(Settings)
                             self:Ban(Players[NonLoweredArguments[2]])
                         end
                     elseif Arguments[1] == "timedban" then
-                    
+                        --// TODO
                     end
                 end
             end)
@@ -83,8 +80,7 @@ function Hammer:Unban(Player)
 end
 
 function Hammer:IsBanned(Player)
-    if Player and DS2("Bans", Player):Get(false) or DS2("TimedBans", Player):Get() - os.time() > 0 then
-        print("Is banned")
+    if Player and RegularBan:IsBanned(Player) or TimedBan:IsBanned(Player) then
         return true
     else
         return false

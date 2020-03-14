@@ -1,21 +1,28 @@
 local RegularBan = {}
 local ServerScriptService = game:GetService("ServerScriptService")
-local DS2 = require(ServerScriptService.Hammer.DataStore2)
+local SavingModule = require(script.Parent.SavingModule).new("Regular")
 
 function RegularBan:Ban(Player, Message)
-    local Store = DS2("Bans", Player)
-    if not Store:Get(false) then
-        Store:Set(true)
+    if not SavingModule:Get(Player.UserId).IsBanned then
+        SavingModule:Set(Player.UserId, {
+            IsBanned = true;
+            Reason = Message or "You have been banned.";
+        })
+
         Player:Kick(Message)
     end
 end
 
 function RegularBan:Unban(Player)
-    DS2("Bans", Player):Set(false)
+    SavingModule:Set(Player.UserId, {
+        IsBanned = false;
+        Reason = "";
+    })
 end
 
 function RegularBan:IsBanned(Player)
-    return DS2("Bans", Player):Get()
+    local Data = SavingModule:Get(Player.UserId)
+    return Data.IsBanned, Data.Reason
 end
 
 return RegularBan
