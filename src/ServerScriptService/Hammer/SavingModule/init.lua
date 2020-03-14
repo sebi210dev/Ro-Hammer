@@ -79,7 +79,7 @@ function SavingModule:Get(UserId)
     local Data = self.Cache[UserId];
 
     if (not Data) then
-        Sucess, Data = self:PcallMethod("GetAsync", UserId);
+        Success, Data = self:PcallMethod("GetAsync", UserId);
 
         if (not Success) then
             Data = DefaultDatas[self.TYPE]

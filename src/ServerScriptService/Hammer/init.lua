@@ -17,8 +17,9 @@ function Hammer.Init(Settings)
 
     local function PlayerAdded(Player)
         local IsBanned, Reason = RegularBan:IsBanned(Player)
-
+        print(IsBanned)
         if IsBanned then
+
             Player:Kick(Reason)
             return
         end
@@ -29,7 +30,7 @@ function Hammer.Init(Settings)
                 local MsgPrefix = string.sub(Message, 1, 1)
 
                 if MsgPrefix == (self.Settings.CmdPrefix or "/") then
-                    local Arguments = string.split(string.lower(string.sub(Message, 2, -1), " "))
+                    local Arguments = string.split(string.lower(string.sub(Message, 2, -1)), " ")
                     local NonLoweredArguments = string.split(string.sub(Message, 2, -1), " ")
                     print(Arguments[1])
                     if Arguments[1] == "ban" then
