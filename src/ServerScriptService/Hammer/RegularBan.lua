@@ -22,6 +22,7 @@ end
 
 function RegularBan:IsBanned(Player)
     local Data = SavingModule:Get(Player.UserId)
+    print(Data.IsBanned)
     return Data.IsBanned, Data.Reason
 end
 
