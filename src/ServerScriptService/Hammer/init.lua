@@ -17,18 +17,19 @@ function Hammer.Init(Settings)
 
     local function PlayerAdded(Player)
         local IsBanned, Reason = RegularBan:IsBanned(Player)
-
+        print(IsBanned)
         if IsBanned then
+
             Player:Kick(Reason)
             return
         end
 
         if self.Settings.CmdsEnabled and self.Settings.Admins and table.find(self.Settings.Admins, Player.UserId) then
             Player.Chatted:Connect(function(Message)
-                
                 local MsgPrefix = string.sub(Message, 1, 1)
 
                 if (MsgPrefix == self.Settings.CmdPrefix or MsgPrefix == "/") then
+                    
                     local Arguments = string.split(string.lower(string.sub(Message, 2, -1)), " ")
                     local NonLoweredArguments = string.split(string.sub(Message, 2, -1), " ")
                     print(Arguments[1])
