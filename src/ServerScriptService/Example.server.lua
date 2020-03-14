@@ -20,8 +20,6 @@ local Hammer = Module.Init(Options)
 local function PlayerAdded(Player)
     local IsBanned = Hammer:IsBanned(Player)
     if (Player.UserId == SebiId and not IsBanned) then
-        print("BANAN")
-        Hammer:TimedBan(Player, 20)
     end
 end
 
