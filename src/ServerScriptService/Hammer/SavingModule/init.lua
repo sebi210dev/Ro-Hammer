@@ -66,7 +66,7 @@ function SavingModule:PcallMethod(DataStoreMethod, UserId, ...)
 end
 
 function SavingModule:Set(UserId, Value)
-    local Player = Players:GetPlayerFromUserId(UserId);
+    local Player = Players:GetPlayerByUserId(UserId);
 
     if (Player) then
         self.Cache[UserId] = Value;
